@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Score {
@@ -14,19 +15,19 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
+    @NotNull
     private WeaponType weaponType;
-    @Column(nullable = false)
+    @NotNull
     private TargetType targetType;
 
-    @Column(nullable = false)
+    @NotNull
     private int totalPoinsMax;
-    @Column(nullable = false)
+    @NotNull
     private int totalPointsDone;
     private String name;
-    @Column(nullable = false)
+    @NotNull
     private boolean isTournament;
-    @Column(nullable = false)
+    @NotNull
     private Date date;
     private String comment;
 }
