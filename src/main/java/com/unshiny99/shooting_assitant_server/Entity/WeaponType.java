@@ -1,4 +1,4 @@
-package com.unshiny99.shooting_assitant_server.Model;
+package com.unshiny99.shooting_assitant_server.Entity;
 
 public enum WeaponType {
     RIFLE("carabine"),

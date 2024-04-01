@@ -29,9 +29,9 @@ public class WebSecurityConfig {
         http.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorizeRequests -> 
                  authorizeRequests
-                    .requestMatchers(HttpMethod.GET, "/scores", "/scores/**").permitAll()
                     .anyRequest()
-                    .authenticated());
+                    //.requestMatchers(HttpMethod.GET, "/scores", "/scores/**")
+                    .permitAll());
         return http.build();
     }
 
