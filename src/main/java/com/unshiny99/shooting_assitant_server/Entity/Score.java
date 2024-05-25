@@ -20,7 +20,7 @@ public class Score {
     private TargetType targetType;
 
     @NotNull
-    private int totalPoinsMax;
+    private int totalPointsMax;
     @NotNull
     private int totalPointsDone;
     private String name;
@@ -48,11 +48,11 @@ public class Score {
     public void setTargetType(TargetType targetType) {
         this.targetType = targetType;
     }
-    public int getTotalPoinsMax() {
-        return totalPoinsMax;
+    public int gettotalPointsMax() {
+        return totalPointsMax;
     }
-    public void setTotalPoinsMax(int totalPoinsMax) {
-        this.totalPoinsMax = totalPoinsMax;
+    public void settotalPointsMax(int totalPointsMax) {
+        this.totalPointsMax = totalPointsMax;
     }
     public int getTotalPointsDone() {
         return totalPointsDone;
