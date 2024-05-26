@@ -84,4 +84,16 @@ public class Score {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Score() {}
+
+    public Score(@NotNull WeaponType weaponType, @NotNull TargetType targetType, @NotNull int totalPointsMax,
+            @NotNull int totalPointsDone, @NotNull boolean isTournament, @NotNull Date date) {
+        this.weaponType = weaponType;
+        this.targetType = targetType;
+        this.totalPointsMax = totalPointsMax;
+        this.totalPointsDone = totalPointsDone;
+        this.isTournament = isTournament;
+        this.date = date;
+    }
 }
