@@ -30,6 +30,7 @@ public class ScoreControllerTest {
 	@LocalServerPort
 	private int port;
 	private final String API_ROOT = "/api/scores";
+	private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
 	@Before
 	public void setUp() throws Exception {
@@ -60,6 +61,14 @@ public class ScoreControllerTest {
         return getFullPath() + "/" + response.jsonPath().get("id");
     }
 
+	private String updateScoreAsUri(int id, Score score) {
+        Response response = RestAssured.given()
+          .contentType(MediaType.APPLICATION_JSON_VALUE)
+          .body(score)
+          .put(getFullPath() + "/" + id);
+        return getFullPath() + "/" + response.jsonPath().get("id");
+    }
+
 	
 	@Test
 	public void whenGetAllScores_thenOK() {
@@ -74,8 +83,6 @@ public class ScoreControllerTest {
 		Score score = createRandomScore();
 		String location = createScoreAsUri(score);
 		Response response = RestAssured.get(location);
-		// needed to compare the 2 dates, as we have to parse the String to a Date type
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 		
 		assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 		assertEquals(score.getWeaponType().toString(), response.jsonPath().get("weaponType"));
@@ -95,4 +102,35 @@ public class ScoreControllerTest {
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
 		assertEquals(response.getBody().asString(), "Score non trouvé");
 	}
+
+	@Test
+	public void whenGetUpdatedScoreById_thenOK() throws ParseException {
+		Score score = createRandomScore();
+		String location = createScoreAsUri(score);
+		Response responseTemp = RestAssured.get(location);
+
+		int scoreId = responseTemp.jsonPath().getInt("id");
+		Score score2 = new Score(
+			WeaponType.RIFLE, 
+			TargetType.ISSF, 
+			300, 
+			279, 
+			false, 
+			Date.from(Instant.now())
+		);
+		String location2 = updateScoreAsUri(scoreId, score2);
+		Response response = RestAssured.get(location2);
+		
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+		assertEquals(score.getWeaponType().toString(), response.jsonPath().get("weaponType"));
+		assertEquals(score.getTargetType().toString(), response.jsonPath().get("targetType"));
+		assertEquals(score.getTotalPointsMax(), response.jsonPath().get("totalPointsMax"));
+		assertEquals(score.getTotalPointsDone(), response.jsonPath().get("totalPointsDone"));
+		assertEquals(score.getName(), response.jsonPath().get("name"));
+		assertEquals(score.getIsTournament(), response.jsonPath().get("isTournament"));
+		assertEquals(score.getDate(), dateFormatter.parse(response.jsonPath().get("date")));
+		assertEquals(score.getComment(), response.jsonPath().get("comment"));
+	}
+
+
 }
