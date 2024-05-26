@@ -96,4 +96,11 @@ public class Score {
         this.isTournament = isTournament;
         this.date = date;
     }
+    
+    @Override
+    public String toString() {
+        return "Score [id=" + id + ", weaponType=" + weaponType + ", targetType=" + targetType + ", totalPointsMax="
+                + totalPointsMax + ", totalPointsDone=" + totalPointsDone + ", name=" + name + ", isTournament="
+                + isTournament + ", date=" + date + ", comment=" + comment + "]";
+    }
 }
