@@ -21,8 +21,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
           new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler({ ScoreIdMismatchException.class, 
-      ConstraintViolationException.class, 
+    @ExceptionHandler({ ConstraintViolationException.class, 
       DataIntegrityViolationException.class })
     public ResponseEntity<Object> handleBadRequest(
       Exception ex, WebRequest request) {

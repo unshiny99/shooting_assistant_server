@@ -20,9 +20,9 @@ public class Score {
     private TargetType targetType;
 
     @NotNull
-    private int totalPointsMax;
+    private Integer totalPointsMax;
     @NotNull
-    private int totalPointsDone;
+    private Integer totalPointsDone;
     private String name;
     @NotNull
     private boolean isTournament;
@@ -48,16 +48,16 @@ public class Score {
     public void setTargetType(TargetType targetType) {
         this.targetType = targetType;
     }
-    public int gettotalPointsMax() {
+    public Integer getTotalPointsMax() {
         return totalPointsMax;
     }
-    public void settotalPointsMax(int totalPointsMax) {
+    public void setTotalPointsMax(Integer totalPointsMax) {
         this.totalPointsMax = totalPointsMax;
     }
-    public int getTotalPointsDone() {
+    public Integer getTotalPointsDone() {
         return totalPointsDone;
     }
-    public void setTotalPointsDone(int totalPointsDone) {
+    public void setTotalPointsDone(Integer totalPointsDone) {
         this.totalPointsDone = totalPointsDone;
     }
     public String getName() {
@@ -66,10 +66,10 @@ public class Score {
     public void setName(String name) {
         this.name = name;
     }
-    public boolean isTournament() {
+    public boolean getIsTournament() {
         return isTournament;
     }
-    public void setTournament(boolean isTournament) {
+    public void setIsTournament(boolean isTournament) {
         this.isTournament = isTournament;
     }
     public Date getDate() {
@@ -87,8 +87,8 @@ public class Score {
 
     public Score() {}
 
-    public Score(@NotNull WeaponType weaponType, @NotNull TargetType targetType, @NotNull int totalPointsMax,
-            @NotNull int totalPointsDone, @NotNull boolean isTournament, @NotNull Date date) {
+    public Score(@NotNull WeaponType weaponType, @NotNull TargetType targetType, @NotNull Integer totalPointsMax,
+            @NotNull Integer totalPointsDone, @NotNull boolean isTournament, @NotNull Date date) {
         this.weaponType = weaponType;
         this.targetType = targetType;
         this.totalPointsMax = totalPointsMax;
