@@ -63,7 +63,8 @@ public class ScoreController {
             // update the object
             scoreRepository.save(score);
 
-            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(score));
+            String response = mapper.writeValueAsString(score);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le score n'a pas été trouvé");
         }
