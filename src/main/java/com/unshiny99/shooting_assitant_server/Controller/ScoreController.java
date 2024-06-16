@@ -78,7 +78,6 @@ public class ScoreController {
             scoreRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Le score a bien été supprimé");
         } else {
-            //throw new ScoreNotFoundException("Le score n'a pas été trouvé", null);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le score n'a pas été trouvé");
         }
     }

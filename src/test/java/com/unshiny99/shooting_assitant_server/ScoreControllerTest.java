@@ -69,6 +69,12 @@ public class ScoreControllerTest {
         return getFullPath() + "/" + response.jsonPath().get("id");
     }
 
+	private Response deleteScoreAsUri(long id) {
+        Response response = RestAssured.given()
+          .contentType(MediaType.APPLICATION_JSON_VALUE)
+          .delete(getFullPath() + "/" + id);
+        return response;
+    }
 	
 	@Test
 	public void whenGetAllScores_thenOK() {
@@ -105,12 +111,12 @@ public class ScoreControllerTest {
 
 	@Test
 	public void whenGetUpdatedScoreById_thenOK() throws ParseException {
-		Score score = createRandomScore();
-		String location = createScoreAsUri(score);
+		Score oldScore = createRandomScore();
+		String location = createScoreAsUri(oldScore);
 		Response responseTemp = RestAssured.get(location);
 
 		int scoreId = responseTemp.jsonPath().getInt("id");
-		Score score2 = new Score(
+		Score score = new Score(
 			WeaponType.RIFLE, 
 			TargetType.ISSF, 
 			300, 
@@ -118,7 +124,7 @@ public class ScoreControllerTest {
 			false, 
 			Date.from(Instant.now())
 		);
-		String location2 = updateScoreAsUri(scoreId, score2);
+		String location2 = updateScoreAsUri(scoreId, score);
 		Response response = RestAssured.get(location2);
 		
 		assertEquals(HttpStatus.OK.value(), response.getStatusCode());
@@ -132,5 +138,17 @@ public class ScoreControllerTest {
 		assertEquals(score.getComment(), response.jsonPath().get("comment"));
 	}
 
+	@Test
+	public void whenDeleteScoreById_thenOK() {
+		Score oldScore = createRandomScore();
+		String location = createScoreAsUri(oldScore);
+		Response responseTemp = RestAssured.get(location);
 
+		int scoreId = responseTemp.jsonPath().getInt("id");
+
+		Response response = deleteScoreAsUri(scoreId);
+		
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+		assertEquals(response.getBody().asString(), "Le score a bien été supprimé");
+	}
 }
